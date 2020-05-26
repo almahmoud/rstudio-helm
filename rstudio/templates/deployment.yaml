@@ -44,6 +44,10 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: shared-data
+              mountPath: /galaxy/server/config/mutable/
+              subPath: config
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -56,3 +60,11 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+      volumes:
+        - name: shared-data
+          {{- if $.Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ template "rstudio.pvcname" $ }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}

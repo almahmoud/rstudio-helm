@@ -69,3 +69,13 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+persistence:
+  enabled: true
+  name: rstudio-pvc
+  # annotations: {}
+  # storageClass:
+  # existingClaim:
+  accessMode: ReadWriteMany
+  size: 10Gi
+  mountPath: /home/rstudio
