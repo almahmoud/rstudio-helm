@@ -30,7 +30,7 @@ jobs:
         run: sh ./.github/scripts/package.sh
         shell: bash
         env:
-          CHARTS_REPO: cloudve/helm-charts
+          CHARTS_REPO: almahmoud/helm-charts
           GIT_TOKEN: ${{ secrets.CHARTS_TOKEN }}
           CHART_NAME: rstudio
           CHARTS_BRANCH: ${{ github.event.pull_request.base.ref }}
